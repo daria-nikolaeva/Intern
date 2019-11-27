@@ -1,0 +1,112 @@
+﻿@using Internship.Models
+@model IndexViewModel
+
+@addTagHelper "*, Internship"
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Library</h1>
+
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label" style="margin:3px">Title: </label>
+        @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label" style="margin:3px">Author: </label>
+        @Html.TextBox("author", Model.FilterViewModel.SelectedAuthor, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label" style="margin:3px">Genre: </label>
+        @Html.DropDownList("genre", Model.FilterViewModel.Genres as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </div>
+</form>
+
+<h1>Books</h1>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"> Title</a>
+
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"> Year</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"> Date of purchase</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"> Author</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"> Genre</a>
+        </th>
+    </tr>
+
+    @foreach (Book b in Model.Books)
+    {
+<tr>
+    <td>@b.BookName</td>
+    <td>@b.Year</td>
+    <td>@b.DateOfPurchase.ToShortDateString()</td>
+    <td>@b.Author.AuthorName</td>
+    <td>@b.Genre.GenreName</td>
+      <td>
+        <a asp-action="Edit" asp-route-id="@b.Id">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@b.Id">Delete</a>
+      </td>
+</tr>
+    }
+</table>
+
+
+
+
+<page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-name="@(Model.FilterViewModel.SelectedName)"
+       asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+       asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
+       class="btn btn-secondary">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Previous
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-name="@(Model.FilterViewModel.SelectedName)"
+       asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+       asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
+       class="btn btn-secondary">
+        Next
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+<p style="margin:15px">
+    <a asp-action="Create"
+       class="btn btn-primary">Add new book</a>
+</p>

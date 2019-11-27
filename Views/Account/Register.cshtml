@@ -1,0 +1,29 @@
+﻿@model Internship.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h1>Register</h1>
+<form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <label style="font-weight:700" asp-for="Login">Enter Login</label><br />
+            <input type="text" asp-for="Login" />
+            <span asp-validation-for="Login" />
+        </div>
+        <div>
+            <label style="font-weight:700" asp-for="Password">Enter Password</label><br />
+            <input asp-for="Password" />
+            <span asp-validation-for="Password" />
+        </div>
+        <div>
+            <label style="font-weight:700" asp-for="ConfirmPassword">Confirm Password</label><br />
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword" />
+        </div>
+        <div>
+            <input class="btn btn-success" style="margin:30px" type="submit" value="Registration" />
+        </div>
+    </div>
+</form>
