@@ -269,7 +269,6 @@ C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\bin\Debug\netcoreapp3.0\
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.csprojAssemblyReference.cache
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\staticwebassets\Internship.StaticWebAssets.Manifest.cache
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\staticwebassets\Internship.StaticWebAssets.xml
-C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.RazorAssemblyInfo.cache
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.RazorAssemblyInfo.cs
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.AssemblyInfoInputs.cache
