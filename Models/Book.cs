@@ -11,6 +11,7 @@ namespace Internship
         public short GenreId { get; set; }
         public decimal Year { get; set; }
         public DateTime DateOfPurchase { get; set; }
+        
 
         public virtual Authors Author { get; set; }
         public virtual Genre Genre { get; set; }

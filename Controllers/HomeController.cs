@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Internship.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly booksDBContext _context;
@@ -21,16 +21,6 @@ namespace Internship.Controllers
             _context = context;
         }
 
-        [Authorize]
-        public IActionResult Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return Content(User.Identity.Name);
-            }
-            return Content("Haven't been autentificated");
-        }
-         
         // GET: Home
         public async Task<IActionResult> Index(int? genre,string name,string author,int page=1)
         {
