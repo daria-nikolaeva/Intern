@@ -296,3 +296,5 @@ C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.dll
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.pdb
 C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\bin\Debug\netcoreapp3.0\web.config
+C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\NikolaevaD\source\repos\QA.Internship.Library2\obj\Debug\netcoreapp3.0\Internship.sourcelink.json

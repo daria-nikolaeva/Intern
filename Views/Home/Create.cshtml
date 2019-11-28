@@ -1,4 +1,5 @@
-﻿@model Internship.Book
+﻿
+@model Internship.Book
 
 @{
     ViewData["Title"] = "Create";
@@ -19,11 +20,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" class ="form-control" asp-items="ViewBag.AuthorId"></select>
+
+                <input asp-for="Author.AuthorName" class="form-control" />
+
+             
+                <span asp-validation-for="Author.AuthorName" class="text-danger"></span>
+
+                @*<select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>*@
+
             </div>
             <div class="form-group">
                 <label asp-for="GenreId" class="control-label"></label>
-                <select asp-for="GenreId" class ="form-control" asp-items="ViewBag.GenreId"></select>
+                <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Year" class="control-label"></label>

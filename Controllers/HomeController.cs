@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Internship.Controllers
 {
-    [Authorize]
+  
     public class HomeController : Controller
     {
         private readonly booksDBContext _context;
@@ -21,7 +21,10 @@ namespace Internship.Controllers
             _context = context;
         }
 
+
+
         // GET: Home
+        [Authorize]
         public async Task<IActionResult> Index(int? genre,string name,string author,int page=1)
         {
             int pageSize = 3;
@@ -83,6 +86,7 @@ namespace Internship.Controllers
         {
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "AuthorName");
             ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "GenreName");
+            
             return View();
         }
 
@@ -91,14 +95,17 @@ namespace Internship.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BookName,AuthorId,GenreId,Year,DateOfPurchase")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,BookName,AuthorId,GenreId,Year,DateOfPurchase")] Book book, Authors author)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(book);
+                _context.Authors.Add(author);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "AuthorName", book.AuthorId);
             ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "GenreName", book.GenreId);
             return View(book);

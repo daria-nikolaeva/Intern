@@ -33,7 +33,7 @@ namespace Internship
                 {
                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                });
-            services.AddMvc(); 
+            services.AddMvc(opts => opts.EnableEndpointRouting = false); 
            
         }
 
@@ -57,13 +57,13 @@ namespace Internship
 
             app.UseAuthorization();
             app.UseAuthentication();
-           
 
-            app.UseEndpoints(endpoints =>
+
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
