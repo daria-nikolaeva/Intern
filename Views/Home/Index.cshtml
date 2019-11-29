@@ -77,35 +77,48 @@
     }
 </table>
 
+<div class="btn-group">
+
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index" style="height:40px"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
+               class="btn btn-secondary">
+
+                Previous
+            </a>
+        }
+  
+   
+        <page-link page-model="Model.PageViewModel" page-action="Index"
+                   page-url-name="@(Model.FilterViewModel.SelectedName)"
+                   page-url-author="@(Model.FilterViewModel.SelectedAuthor)"
+                   page-url-genre="@(Model.FilterViewModel.SelectedGenre)">
+
+        </page-link>
+   
+
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index" style="height:40px"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
+               asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
+               class="btn btn-secondary">
+
+                Next
+            </a>
+         }
+   
+</div>
 
 
 
-<page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
 
-@if (Model.PageViewModel.HasPreviousPage)
-{
-    <a asp-action="Index"
-       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-       asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
-       asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
-       class="btn btn-secondary">
-        <i class="glyphicon glyphicon-chevron-left"></i>
-        Previous
-    </a>
-}
-@if (Model.PageViewModel.HasNextPage)
-{
-    <a asp-action="Index"
-       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-       asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-author="@(Model.FilterViewModel.SelectedAuthor)"
-       asp-route-genre="@(Model.FilterViewModel.SelectedGenre)"
-       class="btn btn-secondary">
-        Next
-        <i class="glyphicon glyphicon-chevron-right"></i>
-    </a>
-}
 <p style="margin:15px">
     <a asp-action="Create"
        class="btn btn-primary">Add new book</a>

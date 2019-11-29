@@ -15,7 +15,6 @@ namespace Internship.Controllers
     public class HomeController : Controller
     {
         private readonly booksDBContext _context;
-
         public HomeController(booksDBContext context)
         {
             _context = context;
@@ -51,10 +50,10 @@ namespace Internship.Controllers
             var items = await books.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
 
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+          
             IndexViewModel viewModel = new IndexViewModel
             {
-                PageViewModel = pageViewModel,
+                PageViewModel = new PageViewModel(count, page, pageSize),
                 FilterViewModel = new FilterViewModel(_context.Genre.ToList(), genre, name, author),
                 Books = items
             };
@@ -95,20 +94,31 @@ namespace Internship.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BookName,AuthorId,GenreId,Year,DateOfPurchase")] Book book, Authors author)
+        public async Task<IActionResult> Create(CreateViewModel model )
         {
             if (ModelState.IsValid)
             {
-                _context.Add(book);
-                _context.Authors.Add(author);
+                if (!_context.Authors.Any(a => a.AuthorName == model.Author.AuthorName))
+                {
+                    _context.Authors.Add(model.Author);
+                    await _context.SaveChangesAsync();
+                }
 
+
+                var auth = await _context.Authors.FirstOrDefaultAsync(a => a.AuthorName == model.Author.AuthorName);
+                model.Book.AuthorId = auth.Id;
+
+                _context.Add(model.Book);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "AuthorName", book.AuthorId);
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "GenreName", book.GenreId);
-            return View(book);
+            //ModelState.AddModelError("", model.Author.AuthorName.ToString());
+
+            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "AuthorName", model.Book.AuthorId);
+            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "GenreName", model.Book.GenreId);
+            return View(model);
         }
 
         // GET: Home/Edit/5
